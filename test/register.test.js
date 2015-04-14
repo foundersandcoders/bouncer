@@ -4,6 +4,7 @@ var test = require("tape");
 var server = require("../lib/server.js");
 var es = require("esta");
 var aguid = require("aguid");
+var request = require("request");
 
 test("POST /register should return 400 if no password or email sent", function (t) {
 
@@ -39,6 +40,8 @@ test("POST /register should add user to user database", function (t) {
   server.inject(request, function (res) {
 
     t.equals(res.statusCode, 200, "200 code returned");
+    t.ok(res.headers.authorization, "auth header set");
+    t.ok(JSON.parse(res.payload).created, "session created");
     t.end();
   });
 
@@ -73,6 +76,10 @@ test("clearup after test", function (t) {
     email: "admin"
   };
   es.delete(user, function () {
-    t.end();
+
+    request.del("http://127.0.0.1:9200/clerk/sessions/_query?q=userId:" + aguid("admin"), function () {
+
+      t.end();
+    });
   });
 });
