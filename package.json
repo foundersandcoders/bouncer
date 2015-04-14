@@ -40,5 +40,8 @@
   "pre-commit": [
     "jshint",
     "coverage"
-  ]
+  ],
+  "dependencies": {
+    "hapi": "^8.4.0"
+  }
 }
