@@ -51,16 +51,14 @@ test("POST /register should add user to user database", function (t) {
 });
 
 
-test("POST /validate should return 200 with correct token", function (t) {
-
-  var payload = {
-    token: jwtoken
-  };
+test("GET /validate should return 200 with correct token", function (t) {
 
   var request = {
-    method: "POST",
+    method: "GET",
     url: "/validate",
-    payload: payload
+    headers: {
+      authorization: jwtoken
+    }
   };
 
   server.inject(request, function (res) {
@@ -91,16 +89,14 @@ test("GET /logout should return 200 and clear token", function (t) {
 });
 
 
-test("POST /validate should return 401 because session not found", function (t) {
-
-  var payload = {
-    token: jwtoken
-  };
+test("GET /validate should return 401 because session not found", function (t) {
 
   var request = {
-    method: "POST",
+    method: "GET",
     url: "/validate",
-    payload: payload
+    headers: {
+      authorization: jwtoken
+    }
   };
 
   server.inject(request, function (res) {
