@@ -6,6 +6,7 @@ var es = require("esta");
 var aguid = require("aguid");
 var request = require("request");
 
+
 test("POST /register should return 400 if no password or email sent", function (t) {
 
   var payload = {};
@@ -47,6 +48,7 @@ test("POST /register should add user to user database", function (t) {
 
 });
 
+
 test("POST /register should return 400 if user already exists", function (t) {
 
   var payload = {
@@ -66,6 +68,7 @@ test("POST /register should return 400 if user already exists", function (t) {
     t.end();
   });
 });
+
 
 test("clearup after test", function (t) {
 

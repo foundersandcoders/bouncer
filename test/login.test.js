@@ -6,6 +6,7 @@ var es = require("esta");
 var aguid = require("aguid");
 var request = require("request");
 
+
 test("GET /login should return 401 if no username and password", function (t) {
 
   var request = {
@@ -19,6 +20,7 @@ test("GET /login should return 401 if no username and password", function (t) {
     t.end();
   });
 });
+
 
 test("GET /login should return 401 if username and password invalid", function (t) {
 
@@ -40,6 +42,7 @@ test("GET /login should return 401 if username and password invalid", function (
     t.end();
   });
 });
+
 
 test("POST /register should add user to user database", function (t) {
 
