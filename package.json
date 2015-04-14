@@ -9,7 +9,8 @@
   "scripts": {
     "test": "./node_modules/tape/bin/tape ./test/*.test.js | ./node_modules/.bin/tap-spec",
     "jshint": "./node_modules/.bin/jshint -c ./.jshintrc --exclude-path .gitignore .",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/tape/bin/tape ./test/*.test.js && ./node_modules/.bin/istanbul check-coverage --statements 95 --functions 95 --lines 95 --branches 95"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/tape/bin/tape ./test/*.test.js && ./node_modules/.bin/istanbul check-coverage --statements 95 --functions 95 --lines 95 --branches 95",
+    "start": "export ES_HOST='127.0.0.1' && export ES_PORT=9200 && node index.js"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,10 @@
     "coverage"
   ],
   "dependencies": {
-    "hapi": "^8.4.0"
+    "aguid": "^1.0.3",
+    "bcrypt": "^0.8.2",
+    "esta": "^3.2.1",
+    "hapi": "^8.4.0",
+    "hapi-auth-basic": "^2.0.0"
   }
 }
