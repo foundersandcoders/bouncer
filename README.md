@@ -25,6 +25,10 @@ Returns an authorization token as a response header in the ```Authorization``` f
 Requires an email and password in the request body. Creates a new User in the database with this email and password. Returns an authorization token as a response header in the ```Authorization``` field.
 
 
-#### POST /validate 
+#### GET /validate 
 
 Requires an authorization token in the request body. Verifies whether the token is valid. Returns the matching Session from the database in the response body and the authorization token as a response header in the ```Authorization``` field.
+
+#### GET /logout
+
+If a valid authorization token is set as a response header in the ```Authorization``` field, it is invalidated and cleared from the database.
