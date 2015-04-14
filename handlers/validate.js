@@ -1,10 +1,10 @@
 "use strict";
 
-var validateSession = require("../lib/auth.js").validateSession;
+var verify = require("../lib/verify.js");
 
 function validate (req, res) {
 
-  validateSession(req.headers.authorization, function (isValid, session) {
+  verify(req.headers.authorization, function (isValid, session) {
 
     if (!isValid) {
       return res({

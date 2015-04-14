@@ -1,10 +1,10 @@
 "use strict";
 
-var signToken = require("../lib/auth.js").signToken;
+var sign = require("../lib/sign.js");
 
 function login (req, res) {
 
-  signToken(req.auth.credentials.email, function (token, esresponse) {
+  sign(req.auth.credentials.email, function (token, esresponse) {
 
     return res(esresponse).header("Authorization", token);
   });

@@ -3,7 +3,7 @@
 var es = require("esta");
 var aguid = require("aguid");
 var bcrypt = require("bcrypt");
-var signToken = require("../lib/auth.js").signToken;
+var sign = require("../lib/sign.js");
 
 function register (req, res) {
 
@@ -30,7 +30,7 @@ function register (req, res) {
           user.password = hash;
           es.create(user, function () {
 
-            signToken(user.email, function (token, esresponse) {
+            sign(user.email, function (token, esresponse) {
 
               return res(esresponse).header("Authorization", token);
             });

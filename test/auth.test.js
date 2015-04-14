@@ -1,15 +1,15 @@
 "use strict";
 
 var test = require("tape");
-var signToken = require("../lib/auth.js").signToken;
-var validateSession = require("../lib/auth.js").validateSession;
+var sign = require("../lib/sign.js");
+var verify = require("../lib/verify.js");
 var jwt = require("jsonwebtoken");
 var aguid = require("aguid");
 var request = require("request");
 
 var jwtoken;
 
-test("signToken should pass signed token and es response to cb", function (t) {
+test("sign should pass signed token and es response to cb", function (t) {
 
   var email = "wil";
 
@@ -23,13 +23,13 @@ test("signToken should pass signed token and es response to cb", function (t) {
     });
   }
 
-  signToken(email, callback);
+  sign(email, callback);
 });
 
 
-test("validateSession should pass true and session to cb if session is valid", function (t) {
+test("verify should pass true and session to cb if session is valid", function (t) {
 
-  validateSession(jwtoken, function (isValid, session) {
+  verify(jwtoken, function (isValid, session) {
 
     t.ok(isValid, "session is valid");
     t.equals(session.userId, aguid("wil"), "correct session returned");
@@ -39,9 +39,9 @@ test("validateSession should pass true and session to cb if session is valid", f
 });
 
 
-test("validateSession should pass false to cb if session is invalid", function (t) {
+test("verify should pass false to cb if session is invalid", function (t) {
 
-  validateSession("aoeuhaoeurcrhd", function (isValid, session) {
+  verify("aoeuhaoeurcrhd", function (isValid, session) {
 
     t.notOk(isValid, "session is not valid");
     t.notOk(session, "session not returned");
