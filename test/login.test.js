@@ -4,15 +4,14 @@ var test = require("tape");
 var server = require("../lib/server.js");
 var es = require("esta");
 var aguid = require("aguid");
+var request = require("request");
 
-test("POST /login should return 401 if no username and password", function (t) {
 
-  var payload = {};
+test("GET /login should return 401 if no username and password", function (t) {
 
   var request = {
-    method: "POST",
+    method: "GET",
     url: "/login",
-    payload: payload
   };
 
   server.inject(request, function (res) {
@@ -22,18 +21,16 @@ test("POST /login should return 401 if no username and password", function (t) {
   });
 });
 
-test("POST /login should return 401 if username and password invalid", function (t) {
 
-  var payload = {};
+test("GET /login should return 401 if username and password invalid", function (t) {
 
   var username =  "whatever";
   var password =  "yourmum";
   var authorization = "Basic " + (new Buffer(username + ":" + password, "utf8")).toString("base64");
 
   var request = {
-    method: "POST",
+    method: "GET",
     url: "/login",
-    payload: payload,
     headers: {
       authorization: authorization
     }
@@ -45,6 +42,7 @@ test("POST /login should return 401 if username and password invalid", function 
     t.end();
   });
 });
+
 
 test("POST /register should add user to user database", function (t) {
 
@@ -68,7 +66,7 @@ test("POST /register should add user to user database", function (t) {
 });
 
 
-test("POST /login should return 200 if username and password are valid", function (t) {
+test("GET /login should return 200 if username and password are valid", function (t) {
 
   var email = "admin";
   var password = "god";
@@ -76,9 +74,8 @@ test("POST /login should return 200 if username and password are valid", functio
   var authorization = "Basic " + (new Buffer(email + ":" + password, "utf8")).toString("base64");
 
   var request = {
-    method: "POST",
+    method: "GET",
     url: "/login",
-    payload: {},
     headers: {
       authorization: authorization
     }
@@ -87,6 +84,8 @@ test("POST /login should return 200 if username and password are valid", functio
   server.inject(request, function (res) {
 
     t.equals(res.statusCode, 200, "200 code returned");
+    t.ok(res.headers.authorization, "auth header set");
+    t.ok(JSON.parse(res.payload).created, "session created");
     t.end();
   });
 });
@@ -101,6 +100,10 @@ test("clearup after test", function (t) {
     email: "admin"
   };
   es.delete(user, function () {
-    t.end();
+
+    request.del("http://127.0.0.1:9200/clerk/sessions/_query?q=userId:" + aguid("admin"), function () {
+
+      t.end();
+    });
   });
 });
