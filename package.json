@@ -7,9 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/tape/bin/tape ./test/*.test.js | ./node_modules/.bin/tap-spec",
-    "jshint": "./node_modules/.bin/jshint -c ./.jshintrc --exclude-path .gitignore .",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/tape/bin/tape ./test/*.test.js && ./node_modules/.bin/istanbul check-coverage --statements 95 --functions 95 --lines 95 --branches 95",
+    "env": "export ES_HOST='127.0.0.1' && export ES_PORT=9200 && export ES_INDEX='clerk' && export JWT_SECRET='tellnoone'",
+    "test": "tape ./test/*.test.js | tap-spec",
+    "jshint": "jshint -c ./.jshintrc --exclude-path .gitignore .",
+    "coverage": "istanbul cover tape ./test/*.test.js && istanbul check-coverage --statements 95 --functions 95 --lines 95 --branches 95",
     "start": "export ES_HOST='127.0.0.1' && export ES_PORT=9200 && node index.js"
   },
   "repository": {
