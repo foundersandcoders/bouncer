@@ -47,7 +47,7 @@
   "dependencies": {
     "aguid": "^1.0.3",
     "bcrypt": "^0.8.2",
-    "esta": "^3.2.1",
+    "esta": "^4.0.2",
     "hapi": "^8.4.0",
     "hapi-auth-basic": "^2.0.0",
     "jsonwebtoken": "^5.0.0"

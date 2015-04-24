@@ -6,6 +6,7 @@ var verify = require("../lib/verify.js");
 var jwt = require("jsonwebtoken");
 var aguid = require("aguid");
 var request = require("request");
+var url = process.env.BONSAI_URL || "http://" + process.env.ES_HOST + ":" + process.env.ES_PORT;
 
 var jwtoken;
 
@@ -52,7 +53,7 @@ test("verify should pass false to cb if session is invalid", function (t) {
 
 test("clear database", function (t) {
 
-  request.del("http://127.0.0.1:9200/clerk/sessions/_query?q=userId:" + aguid("wil"), function () {
+  request.del(url + "/clerk/sessions/_query?q=userId:" + aguid("wil"), function () {
 
     t.end();
   });

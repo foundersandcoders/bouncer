@@ -5,7 +5,7 @@ var server = require("../lib/server.js");
 var es = require("esta");
 var aguid = require("aguid");
 var request = require("request");
-
+var url = process.env.BONSAI_URL || "http://" + process.env.ES_HOST + ":" + process.env.ES_PORT;
 
 test("GET /login should return 401 if no username and password", function (t) {
 
@@ -101,7 +101,7 @@ test("clearup after test", function (t) {
   };
   es.delete(user, function () {
 
-    request.del("http://127.0.0.1:9200/clerk/sessions/_query?q=userId:" + aguid("admin"), function () {
+    request.del(url + "/clerk/sessions/_query?q=userId:" + aguid("admin"), function () {
 
       t.end();
     });
