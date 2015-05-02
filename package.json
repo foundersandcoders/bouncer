@@ -8,7 +8,7 @@
   },
   "scripts": {
     "env": "export ES_HOST='127.0.0.1' && export ES_PORT=9200 && export ES_INDEX='clerk' && export JWT_SECRET='tellnoone'",
-    "test": "tape ./test/*.test.js | tap-spec",
+    "test": "NODE_ENV=test tape ./test/*.test.js",
     "jshint": "jshint -c ./.jshintrc --exclude-path .gitignore .",
     "coverage": "istanbul cover tape ./test/*.test.js && istanbul check-coverage --statements 95 --functions 95 --lines 95 --branches 95",
     "debug": "node-debug index.js",
@@ -27,7 +27,7 @@
     "logout",
     "signup"
   ],
-  "author": "William Fisher, Naomi Gaynor",
+  "author": "William Fisher, Naomi Gaynor, Besart Shyti",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/foundersandcoders/bouncer/issues"
@@ -52,6 +52,7 @@
     "esta": "^4.0.2",
     "hapi": "^8.4.0",
     "hapi-auth-basic": "^2.0.0",
-    "jsonwebtoken": "^5.0.0"
+    "jsonwebtoken": "^5.0.0",
+    "torf": "^1.0.6"
   }
 }
