@@ -53,6 +53,7 @@
     "hapi": "^8.4.0",
     "hapi-auth-basic": "^2.0.0",
     "jsonwebtoken": "^5.0.0",
+    "russian-doll": "^1.0.5",
     "torf": "^1.0.6"
   }
 }
